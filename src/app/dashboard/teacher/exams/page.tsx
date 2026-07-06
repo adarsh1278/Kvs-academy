@@ -316,6 +316,7 @@ export default function TeacherExamsPage() {
               <div className="space-y-1.5">
                 <label className="text-[10px] font-bold uppercase text-slate-400">Class & Section</label>
                 <Select
+                  key={`section-select-${availableSections.length}-${selectedClassId}`}
                   value={selectedClassId ? `${selectedClassId}-${selectedSectionId}` : ''}
                   onValueChange={(val) => {
                     if (val) {
@@ -341,7 +342,12 @@ export default function TeacherExamsPage() {
               {type === 'Custom Test' && (
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold uppercase text-slate-400">Subject</label>
-                  <Select value={selectedSubjectId} onValueChange={(val) => setSelectedSubjectId(val || '')} disabled={!selectedSectionId}>
+                  <Select 
+                    key={`subject-select-${availableSubjects.length}-${selectedSubjectId}`}
+                    value={selectedSubjectId} 
+                    onValueChange={(val) => setSelectedSubjectId(val || '')} 
+                    disabled={!selectedSectionId}
+                  >
                     <SelectTrigger className="w-full text-xs">
                       <SelectValue placeholder="Choose Subject" />
                     </SelectTrigger>
@@ -440,7 +446,11 @@ export default function TeacherExamsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <label className="text-[10px] font-bold uppercase text-slate-400">Select Exam Session</label>
-              <Select value={selectedExamId} onValueChange={(val) => { setSelectedExamId(val || ''); setMarksSubjectId(''); setStudentsMarks([]); }}>
+              <Select 
+                key={`exam-select-${exams.length}-${selectedExamId}`}
+                value={selectedExamId} 
+                onValueChange={(val) => { setSelectedExamId(val || ''); setMarksSubjectId(''); setStudentsMarks([]); }}
+              >
                 <SelectTrigger className="w-full text-xs">
                   <SelectValue placeholder="Select Exam" />
                 </SelectTrigger>
@@ -456,7 +466,12 @@ export default function TeacherExamsPage() {
 
             <div className="space-y-1.5">
               <label className="text-[10px] font-bold uppercase text-slate-400">Select Subject</label>
-              <Select value={marksSubjectId} onValueChange={(val) => setMarksSubjectId(val || '')} disabled={!selectedExamId}>
+              <Select 
+                key={`subject-select-${marksSubjectOptions.length}-${marksSubjectId}`}
+                value={marksSubjectId} 
+                onValueChange={(val) => setMarksSubjectId(val || '')} 
+                disabled={!selectedExamId}
+              >
                 <SelectTrigger className="w-full text-xs">
                   <SelectValue placeholder={selectedExamId ? "Choose Subject" : "First select an Exam"} />
                 </SelectTrigger>

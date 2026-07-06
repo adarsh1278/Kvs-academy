@@ -213,7 +213,7 @@ export default function TimetableConfig() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
         <div className="space-y-2">
           <label className="text-xs font-bold text-slate-500 dark:text-slate-400">Select Class</label>
-          <Select value={selectedClassId} onValueChange={(val) => { setSelectedClassId(val || ''); setSelectedSectionId(''); }}>
+          <Select key={`class-select-${classes.length}`} value={selectedClassId} onValueChange={(val) => { setSelectedClassId(val || ''); setSelectedSectionId(''); }}>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Choose Class" />
             </SelectTrigger>
@@ -228,6 +228,7 @@ export default function TimetableConfig() {
         <div className="space-y-2">
           <label className="text-xs font-bold text-slate-500 dark:text-slate-400">Select Section</label>
           <Select 
+            key={`section-select-${filteredSections.length}-${selectedClassId}`}
             value={selectedSectionId} 
             onValueChange={(val) => setSelectedSectionId(val || '')} 
             disabled={!selectedClassId}
@@ -330,6 +331,7 @@ export default function TimetableConfig() {
                         ) : (
                           <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-3 gap-2">
                             <Select 
+                              key={`subject-${idx}-${subjects.length}-${slot.subjectId}`}
                               value={slot.subjectId || ''} 
                               onValueChange={(val) => updateSlot(day, idx, 'subjectId', val || '')}
                             >
@@ -344,6 +346,7 @@ export default function TimetableConfig() {
                             </Select>
 
                             <Select 
+                              key={`teacher-${idx}-${teachers.length}-${slot.teacherId}`}
                               value={slot.teacherId || ''} 
                               onValueChange={(val) => updateSlot(day, idx, 'teacherId', val || '')}
                             >

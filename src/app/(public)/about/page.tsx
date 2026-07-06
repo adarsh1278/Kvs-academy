@@ -7,7 +7,7 @@ import { Notice } from '@/models/Notice';
 const defaultAbout = {
   title: 'Inspiring Academic Growth Since 1998',
   history:
-    "Excellence Academy was established in 1998 with a vision to provide quality education and foster all-around development. Over the last two decades, we have grown into one of the region's premier educational institutions, combining rigorous academics with extensive co-curricular programs.",
+    "KVS Academy was established in 1998 with a vision to provide quality education and foster all-around development. Over the last two decades, we have grown into one of the region's premier educational institutions, combining rigorous academics with extensive co-curricular programs.",
   mission: 'To cultivate a learning environment that nurtures intellectual curiosity, integrity, and social responsibility.',
   vision: 'To be a globally recognized center of excellence in early and secondary education, producing empathetic leaders.',
 };

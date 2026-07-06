@@ -4,6 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useStore } from '@/store/useStore';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export default function StudentsListPage() {
   const router = useRouter();
@@ -86,46 +94,46 @@ export default function StudentsListPage() {
           <div className="text-center py-10 text-slate-455">No students found.</div>
         ) : (
           <div className="space-y-4">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr className="border-b border-slate-100 dark:border-slate-800 text-slate-400 font-bold uppercase">
-                    <th className="py-2.5">Admission No</th>
-                    <th className="py-2.5">Student Name</th>
-                    <th className="py-2.5">Class / Section</th>
-                    <th className="py-2.5">Parent / Contact</th>
-                    <th className="py-2.5">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-755 dark:text-slate-355">
+            <div className="rounded-md border border-slate-200 dark:border-slate-800 overflow-hidden">
+              <Table>
+                <TableHeader className="bg-slate-50 dark:bg-slate-900/50">
+                  <TableRow className="hover:bg-transparent">
+                    <TableHead className="font-bold uppercase text-slate-500">Admission No</TableHead>
+                    <TableHead className="font-bold uppercase text-slate-500">Student Name</TableHead>
+                    <TableHead className="font-bold uppercase text-slate-500">Class / Section</TableHead>
+                    <TableHead className="font-bold uppercase text-slate-500">Parent / Contact</TableHead>
+                    <TableHead className="font-bold uppercase text-slate-500 text-right">Status</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {paginatedStudents.map((student) => (
-                    <tr
+                    <TableRow
                       key={student.id}
                       onClick={() => {
                         setSelectedStudent(student);
                         router.push(`${pathname}/${student.id}`);
                       }}
-                      className="hover:bg-indigo-50/30 dark:hover:bg-indigo-950/10 transition cursor-pointer"
+                      className="cursor-pointer"
                     >
-                      <td className="py-3.5 font-mono font-bold text-indigo-650 dark:text-indigo-400">{student.admissionNo}</td>
-                      <td className="py-3.5">
+                      <TableCell className="font-mono font-bold text-indigo-650 dark:text-indigo-400">{student.admissionNo}</TableCell>
+                      <TableCell>
                         <span className="block font-bold text-slate-900 dark:text-white">{student.name}</span>
                         <span className="block text-[10px] text-slate-400 mt-0.5">Roll: {student.rollNo}</span>
-                      </td>
-                      <td className="py-3.5 font-bold text-slate-900 dark:text-white">{student.className}</td>
-                      <td className="py-3.5">
+                      </TableCell>
+                      <TableCell className="font-bold text-slate-900 dark:text-white">{student.className}</TableCell>
+                      <TableCell>
                         <span className="block font-medium text-slate-855 dark:text-slate-200">{student.parentName}</span>
                         <span className="block text-[10px] text-slate-400 mt-0.5">{student.phone}</span>
-                      </td>
-                      <td className="py-3.5">
+                      </TableCell>
+                      <TableCell className="text-right">
                         <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-450 border border-emerald-100 dark:border-emerald-900">
                           {student.status}
                         </span>
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
 
             {/* Pagination controls */}

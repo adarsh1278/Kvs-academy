@@ -43,13 +43,13 @@ Password: ${password}
     });
 
     const mailOptions = {
-      from: `"Excellence Academy Admissions" <${user}>`,
+      from: `"KVS Academy Admissions" <${user}>`,
       to: toEmail,
-      subject: `Your Excellence Academy Portal Credentials`,
+      subject: `Your KVS Academy Portal Credentials`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff;">
           <div style="text-align: center; margin-bottom: 20px;">
-            <h1 style="color: #4f46e5; margin: 0; font-size: 24px;">Excellence Academy</h1>
+            <h1 style="color: #4f46e5; margin: 0; font-size: 24px;">KVS Academy</h1>
             <p style="color: #64748b; font-size: 12px; margin: 5px 0 0 0; text-transform: uppercase; letter-spacing: 0.1em;">Institutional ERP Portal</p>
           </div>
           

@@ -465,7 +465,7 @@ export default function FeesCollectionPage() {
               <div className="flex justify-between items-start border-b-2 border-slate-900 pb-4">
                 <div className="space-y-1">
                   <h2 className="text-xl font-black uppercase tracking-tight text-slate-950 print:text-black">
-                    Excellence Academy
+                    KVS Academy
                   </h2>
                   <p className="text-[10px] text-slate-500 leading-tight">
                     45, Palm Avenue, Sector 5, New Delhi - 110001

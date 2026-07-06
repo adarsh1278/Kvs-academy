@@ -8,7 +8,7 @@ export default function ForgotPasswordPage() {
         <School className="h-12 w-12 text-indigo-600 dark:text-indigo-400 mx-auto mb-4" />
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Reset Password</h2>
         <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-          For security reasons, password resets at Excellence Academy are managed centrally.
+          For security reasons, password resets at KVS Academy are managed centrally.
         </p>
         <div className="mt-4 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 p-4 text-xs text-indigo-700 dark:text-indigo-300 font-medium">
           Please contact your class teacher, department head, or the reception desk to have your credentials reset.

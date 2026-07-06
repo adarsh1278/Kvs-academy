@@ -22,27 +22,27 @@ import { Event } from '@/models/Event';
 // Fallback mock CMS content if connection fails or CMS is empty
 const defaultCMS = {
   home_hero: {
-    title: 'Excellence Academy',
+    title: 'KVS Academy',
     subtitle: 'Empowering minds, shaping futures, and building leaders of tomorrow.',
     bannerImage: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200',
     ctaText: 'Apply for Admission',
     ctaLink: '/admissions',
-    address: '45 Palm Ave, New Delhi',
-    phone: '+91 11 2345 6789',
+    address: 'Tejkamalpur road, behind 132kv power house, Pratappur, Patara, Ghatampur, UP 209308',
+    phone: '7985643966',
   },
   principal_message: {
     name: 'Dr. Rajesh Sharma',
     title: "Principal's Message",
     photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400',
     message:
-      'Dear Parents and Students, Welcome to Excellence Academy. Our commitment is to provide a safe, nurturing, and intellectually challenging environment. We believe that every child is unique and has the potential to make a positive impact on the world. We work hand-in-hand with parents to ensure our students grow into responsible, creative, and successful global citizens.',
+      'Dear Parents and Students, Welcome to KVS Academy. Our commitment is to provide a safe, nurturing, and intellectually challenging environment. We believe that every child is unique and has the potential to make a positive impact on the world. We work hand-in-hand with parents to ensure our students grow into responsible, creative, and successful global citizens.',
   },
   director_message: {
     name: 'Mrs. Anita Verma',
     title: "Director's Message",
     photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400',
     message:
-      'At Excellence Academy, our focus is on comprehensive development. Education goes beyond textbooks; it encompasses sports, visual and performing arts, communication skills, and character building. We are dedicated to providing state-of-the-art infrastructure and highly qualified faculty to enable our students to compete at international levels.',
+      'At KVS Academy, our focus is on comprehensive development. Education goes beyond textbooks; it encompasses sports, visual and performing arts, communication skills, and character building. We are dedicated to providing state-of-the-art infrastructure and highly qualified faculty to enable our students to compete at international levels.',
   },
 };
 
@@ -135,16 +135,16 @@ export default async function PublicHomePage() {
     <div className="space-y-20 pb-20">
       {/* 1. Hero Banner */}
       <section
-        className="relative min-h-[600px] flex items-center bg-cover bg-center text-white py-24"
+        className="relative min-h-[600px] flex items-center bg-indigo-950 bg-cover bg-center text-white py-24"
         style={{
-          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), url(${home_hero.bannerImage})`,
+          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), url('${home_hero.bannerImage || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200'}')`,
         }}
       >
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:30px_30px]" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="max-w-2xl space-y-6">
             <div className="inline-flex items-center gap-1.5 rounded-full bg-indigo-500/10 border border-indigo-400/20 px-3.5 py-1.5 text-sm font-semibold text-indigo-300 backdrop-blur-md">
-              <Flame className="h-4 w-4" /> Welcome to Excellence Academy
+              <Flame className="h-4 w-4" /> Welcome to KVS Academy
             </div>
             <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-none text-white">
               {home_hero.title}
@@ -199,9 +199,9 @@ export default async function PublicHomePage() {
         {/* Principal Message Card */}
         <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-sm flex flex-col md:flex-row gap-6 items-start">
           <img
-            src={principal_message.photo}
+            src={principal_message.photo || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400'}
             alt={principal_message.name}
-            className="w-full md:w-44 h-56 object-cover rounded-2xl shrink-0 shadow-inner"
+            className="w-full md:w-44 h-56 object-cover rounded-2xl shrink-0 shadow-inner bg-slate-100"
           />
           <div className="space-y-4">
             <div className="inline-flex items-center gap-1 bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 font-bold text-xs px-3 py-1 rounded-full uppercase">
@@ -217,9 +217,9 @@ export default async function PublicHomePage() {
         {/* Director Message Card */}
         <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-sm flex flex-col md:flex-row gap-6 items-start">
           <img
-            src={director_message.photo}
+            src={director_message.photo || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400'}
             alt={director_message.name}
-            className="w-full md:w-44 h-56 object-cover rounded-2xl shrink-0 shadow-inner"
+            className="w-full md:w-44 h-56 object-cover rounded-2xl shrink-0 shadow-inner bg-slate-100"
           />
           <div className="space-y-4">
             <div className="inline-flex items-center gap-1 bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-bold text-xs px-3 py-1 rounded-full uppercase">
@@ -343,7 +343,7 @@ export default async function PublicHomePage() {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <div className="text-center max-w-xl mx-auto space-y-2">
             <h3 className="text-3xl font-extrabold text-slate-900 dark:text-white">Awards & Achievements</h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Excellence Academy is decorated with multiple recognitions for excellence in pedagogy, sports, and infrastructure.</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">KVS Academy is decorated with multiple recognitions for excellence in pedagogy, sports, and infrastructure.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {((cmsData as any).achievements || []).map((ach: any, idx: number) => (
@@ -375,8 +375,8 @@ export default async function PublicHomePage() {
           {/* Map iframe (8 cols) */}
           <div className="lg:col-span-8 h-96 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm relative">
             <iframe
-              title="Excellence Academy Campus Map"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.5620139789397!2d77.2281896768805!3d28.613939075674317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347ec0ad%3A0x153577d100000000!2sIndia%20Gate!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              title="KVS Academy"
+              src="https://maps.google.com/maps?q=KVS+Academy,+Tejkamalpur+road,+Pratappur,+Patara,+Ghatampur,+Uttar+Pradesh&t=&z=16&ie=UTF8&iwloc=&output=embed"
               className="absolute inset-0 w-full h-full border-0 grayscale dark:invert-[0.9] dark:hue-rotate-180"
               allowFullScreen
               loading="lazy"
@@ -424,30 +424,48 @@ export default async function PublicHomePage() {
         </div>
       </section>
 
-      {/* 5. Enrollment Callout banner */}
+      {/* 6. Campus Facilities */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-indigo-700 to-indigo-900 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-xl border border-indigo-600">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:20px_20px]" />
-          <div className="relative z-10 max-w-xl space-y-4">
-            <h3 className="text-3xl font-black tracking-tight leading-tight">
-              Join the Excellence Family
-            </h3>
-            <p className="text-indigo-200/90 text-sm md:text-base leading-relaxed font-light">
-              Registration forms for student admission are currently being accepted online. Read details regarding the curriculum, fees structure, and submit an enquiry.
+        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-10 md:p-16 shadow-lg relative overflow-hidden">
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-indigo-50 dark:bg-indigo-900/20 rounded-full blur-3xl opacity-50 pointer-events-none" />
+          
+          <div className="text-center mb-12 relative z-10">
+            <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">World-Class Facilities</h2>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 max-w-2xl mx-auto">
+              Providing our students with the best infrastructure to learn, play, and grow in a modern environment.
             </p>
-            <div className="flex flex-wrap gap-3 pt-2">
-              <Link
-                href="/admissions"
-                className="bg-white text-indigo-700 hover:bg-indigo-50 font-bold px-6 py-3 rounded-xl text-sm transition"
-              >
-                Start Enquiry Form
-              </Link>
-              <Link
-                href="/contact"
-                className="border border-indigo-500 hover:border-indigo-400 hover:bg-indigo-800 bg-indigo-800/40 text-indigo-200 font-bold px-6 py-3 rounded-xl text-sm transition"
-              >
-                Contact Admissions Office
-              </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+            {/* Facility 1 */}
+            <div className="bg-slate-50 dark:bg-slate-950 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-indigo-300 transition group cursor-pointer">
+              <div className="h-12 w-12 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Modern Computer Labs</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                High-speed internet, latest generation PCs, and dedicated coding classes to prepare students for the digital future.
+              </p>
+            </div>
+            {/* Facility 2 */}
+            <div className="bg-slate-50 dark:bg-slate-950 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-emerald-300 transition group cursor-pointer">
+              <div className="h-12 w-12 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Sports & Games</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                Sprawling playgrounds for football, cricket, and an indoor complex for table tennis, badminton, and chess.
+              </p>
+            </div>
+            {/* Facility 3 */}
+            <div className="bg-slate-50 dark:bg-slate-950 p-6 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-rose-300 transition group cursor-pointer">
+              <div className="h-12 w-12 bg-rose-100 dark:bg-rose-900/50 text-rose-600 dark:text-rose-400 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Smart Library</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                A massive collection of physical books, digital e-books, and quiet study zones to foster a love for reading.
+              </p>
             </div>
           </div>
         </div>

@@ -4,6 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { Search, Plus } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useStore } from '@/store/useStore';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export default function TeachersListPage() {
   const router = useRouter();
@@ -254,46 +262,46 @@ export default function TeachersListPage() {
           <div className="text-center py-10 text-slate-400">No teachers found matching those search terms.</div>
         ) : (
           <div className="space-y-4">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr className="border-b border-slate-100 dark:border-slate-800 text-slate-400 font-bold uppercase">
-                    <th className="py-2.5">Teacher ID</th>
-                    <th className="py-2.5">Instructor Name</th>
-                    <th className="py-2.5">Qualifications & Experience</th>
-                    <th className="py-2.5">Payroll Salary</th>
-                    <th className="py-2.5">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-750 dark:text-slate-350">
+            <div className="rounded-md border border-slate-200 dark:border-slate-800 overflow-hidden">
+              <Table>
+                <TableHeader className="bg-slate-50 dark:bg-slate-900/50">
+                  <TableRow className="hover:bg-transparent">
+                    <TableHead className="font-bold uppercase text-slate-500">Teacher ID</TableHead>
+                    <TableHead className="font-bold uppercase text-slate-500">Instructor Name</TableHead>
+                    <TableHead className="font-bold uppercase text-slate-500">Qualifications & Experience</TableHead>
+                    <TableHead className="font-bold uppercase text-slate-500">Payroll Salary</TableHead>
+                    <TableHead className="font-bold uppercase text-slate-500 text-right">Status</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {paginatedTeachers.map((t) => (
-                    <tr
+                    <TableRow
                       key={t.id}
                       onClick={() => {
                         setSelectedTeacher(t);
                         router.push(`${pathname}/${t.id}`);
                       }}
-                      className="hover:bg-indigo-50/30 dark:hover:bg-indigo-950/10 transition cursor-pointer"
+                      className="cursor-pointer"
                     >
-                      <td className="py-3.5 font-mono font-bold text-indigo-650 dark:text-indigo-400">{t.teacherId}</td>
-                      <td className="py-3.5">
+                      <TableCell className="font-mono font-bold text-indigo-650 dark:text-indigo-400">{t.teacherId}</TableCell>
+                      <TableCell>
                         <span className="block font-bold text-slate-900 dark:text-white">{t.name}</span>
                         <span className="block text-[10px] text-slate-400 mt-0.5">{t.email}</span>
-                      </td>
-                      <td className="py-3.5">
+                      </TableCell>
+                      <TableCell>
                         <span className="block font-medium text-slate-800 dark:text-slate-300">{t.qualification}</span>
                         <span className="block text-[10px] text-slate-400 mt-0.5">Exp: {t.experience}</span>
-                      </td>
-                      <td className="py-3.5 font-extrabold text-slate-900 dark:text-white">₹{t.salary?.toLocaleString() || '0'}</td>
-                      <td className="py-3.5">
+                      </TableCell>
+                      <TableCell className="font-extrabold text-slate-900 dark:text-white">₹{t.salary?.toLocaleString() || '0'}</TableCell>
+                      <TableCell className="text-right">
                         <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-450 border border-emerald-100 dark:border-emerald-900">
                           {t.status}
                         </span>
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
 
             {/* Pagination controls */}

@@ -9,14 +9,14 @@ import {
   Mail,
   MapPin,
   Clock,
-  LogIn,
 } from 'lucide-react';
+import PublicNavbar from '@/components/layout/PublicNavbar';
 
 const defaultSettings = {
-  schoolName: 'Excellence Academy',
-  phone: '+1 (555) 019-2834',
-  email: 'info@excellence.edu',
-  address: '45 Palm Ave, New Delhi',
+  schoolName: 'KVS Academy',
+  phone: '7985643966',
+  email: 'info@kusmavirendrasinghacademy.com',
+  address: 'Tejkamalpur road, behind 132kv power house, Pratappur, Patara, Ghatampur, Uttar Pradesh 209308',
 };
 
 export default async function PublicLayout({ children }: { children: React.ReactNode }) {
@@ -84,48 +84,7 @@ export default async function PublicLayout({ children }: { children: React.React
       </div>
 
       {/* 2. Primary Navigation Bar */}
-      <header className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-md">
-              <School className="h-6 w-6" />
-            </div>
-            <div>
-              <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white block leading-tight">
-                {settings.schoolName}
-              </span>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest block font-medium">
-                Public School
-              </span>
-            </div>
-          </Link>
-
-          {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-slate-600 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400 transition"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Action CTAs */}
-          <div className="flex items-center gap-3">
-            <ModeToggle />
-            <Link
-              href="/login"
-              className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition"
-            >
-              <LogIn className="h-4 w-4" />
-              <span>Portal Login</span>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <PublicNavbar schoolName={settings.schoolName} />
 
       {/* 3. Page Content */}
       <main className="flex-1 flex flex-col">{children}</main>
@@ -196,7 +155,12 @@ export default async function PublicLayout({ children }: { children: React.React
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
-          <span>© 2026 Excellence Academy. All rights reserved.</span>
+          <div className="flex flex-col gap-1">
+            <span>© 2026 KVS Academy. All rights reserved.</span>
+            <span className="text-slate-400">
+              Made with ❤️ by <a href="https://adarsh1278.vercel.app/" className="text-indigo-400 hover:underline font-bold">Adarsh</a>. For custom Software & ERP Solutions, Call: <span className="text-indigo-400 font-bold">7985643966</span>
+            </span>
+          </div>
           <div className="flex gap-4">
             <a href="#" className="hover:underline">Privacy Policy</a>
             <a href="#" className="hover:underline">Terms of Service</a>

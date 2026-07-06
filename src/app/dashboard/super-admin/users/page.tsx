@@ -2,6 +2,21 @@
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Search, RefreshCw, Shield, UserPlus, X } from 'lucide-react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type Role = 'super_admin' | 'admin' | 'receptionist' | 'teacher' | 'student';
 
@@ -245,17 +260,18 @@ export default function SuperAdminUsersManagerPage() {
               onChange={(e) => setCreateForm((p) => ({ ...p, phone: e.target.value }))}
             />
             <div className="grid grid-cols-2 gap-2">
-              <select
-                className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs outline-none dark:border-slate-800 dark:bg-slate-950"
-                value={createForm.role}
-                onChange={(e) => setCreateForm((p) => ({ ...p, role: e.target.value as Role }))}
-              >
-                {ROLE_OPTIONS.map((r) => (
-                  <option key={r} value={r}>
-                    {r.replace('_', ' ')}
-                  </option>
-                ))}
-              </select>
+              <Select value={createForm.role} onValueChange={(val) => setCreateForm((p) => ({ ...p, role: (val || '') as Role }))}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Role" />
+                </SelectTrigger>
+                <SelectContent>
+                  {ROLE_OPTIONS.map((r) => (
+                    <SelectItem key={r} value={r}>
+                      {r.replace('_', ' ')}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <select
                 className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs outline-none dark:border-slate-800 dark:bg-slate-950"
                 value={createForm.status}
@@ -296,21 +312,25 @@ export default function SuperAdminUsersManagerPage() {
               />
             </div>
             <div className="flex items-center gap-2">
-              <select
-                className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs outline-none dark:border-slate-800 dark:bg-slate-950"
-                value={role}
-                onChange={(e) => {
+              <Select
+                value={role || 'all'}
+                onValueChange={(val) => {
                   setPage(1);
-                  setRole(e.target.value);
+                  setRole(val === 'all' ? '' : (val || ''));
                 }}
               >
-                <option value="">All roles</option>
-                {ROLE_OPTIONS.map((r) => (
-                  <option key={r} value={r}>
-                    {r.replace('_', ' ')}
-                  </option>
-                ))}
-              </select>
+                <SelectTrigger className="w-full sm:w-[150px]">
+                  <SelectValue placeholder="All roles" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All roles</SelectItem>
+                  {ROLE_OPTIONS.map((r) => (
+                    <SelectItem key={r} value={r}>
+                      {r.replace('_', ' ')}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <button
                 type="button"
                 onClick={loadUsers}
@@ -321,47 +341,47 @@ export default function SuperAdminUsersManagerPage() {
             </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead>
-                <tr className="border-b border-slate-100 text-slate-400 dark:border-slate-800">
-                  <th className="py-2">Name</th>
-                  <th className="py-2">Login ID</th>
-                  <th className="py-2">Mobile</th>
-                  <th className="py-2">Role</th>
-                  <th className="py-2">Status</th>
-                </tr>
-              </thead>
-              <tbody>
+          <div className="rounded-md border border-slate-200 dark:border-slate-800 overflow-hidden">
+            <Table>
+              <TableHeader className="bg-slate-50 dark:bg-slate-900/50">
+                <TableRow className="hover:bg-transparent">
+                  <TableHead className="font-bold text-slate-500">Name</TableHead>
+                  <TableHead className="font-bold text-slate-500">Login ID</TableHead>
+                  <TableHead className="font-bold text-slate-500">Mobile</TableHead>
+                  <TableHead className="font-bold text-slate-500">Role</TableHead>
+                  <TableHead className="font-bold text-slate-500">Status</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {loading ? (
-                  <tr>
-                    <td className="py-6 text-slate-400" colSpan={5}>Loading users...</td>
-                  </tr>
+                  <TableRow>
+                    <TableCell className="py-6 text-slate-400 text-center" colSpan={5}>Loading users...</TableCell>
+                  </TableRow>
                 ) : users.length === 0 ? (
-                  <tr>
-                    <td className="py-6 text-slate-400" colSpan={5}>No users found.</td>
-                  </tr>
+                  <TableRow>
+                    <TableCell className="py-6 text-slate-400 text-center" colSpan={5}>No users found.</TableCell>
+                  </TableRow>
                 ) : (
                   users.map((u) => (
-                    <tr
+                    <TableRow
                       key={u._id}
                       onClick={() => loadUserDetail(u._id)}
-                      className="cursor-pointer border-b border-slate-100 text-slate-700 transition hover:bg-slate-50 dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-800/40"
+                      className="cursor-pointer"
                     >
-                      <td className="py-3 font-bold text-slate-900 dark:text-white">{u.name}</td>
-                      <td className="py-3">{u.email}</td>
-                      <td className="py-3">{u.phone || 'N/A'}</td>
-                      <td className="py-3 capitalize">{u.role.replace('_', ' ')}</td>
-                      <td className="py-3">
-                        <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${u.status === 'active' ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'}`}>
+                      <TableCell className="font-bold text-slate-900 dark:text-white">{u.name}</TableCell>
+                      <TableCell>{u.email}</TableCell>
+                      <TableCell>{u.phone || 'N/A'}</TableCell>
+                      <TableCell className="capitalize">{u.role.replace('_', ' ')}</TableCell>
+                      <TableCell>
+                        <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${u.status === 'active' ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-450 border border-emerald-100 dark:border-emerald-900' : 'bg-rose-50 text-rose-700 dark:bg-rose-950/20 dark:text-rose-450 border border-rose-100 dark:border-rose-900'}`}>
                           {u.status}
                         </span>
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))
                 )}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
 
           <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4 text-xs dark:border-slate-800">
@@ -436,28 +456,36 @@ export default function SuperAdminUsersManagerPage() {
               </div>
               <div className="space-y-2 lg:col-span-4">
                 <label className="text-[10px] font-bold uppercase text-slate-400">Role</label>
-                <select
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs outline-none dark:border-slate-800 dark:bg-slate-950"
+                <Select
                   value={detail.user.role}
-                  onChange={(e) => setDetail((p) => (p && p.user ? { ...p, user: { ...p.user, role: e.target.value } } : p))}
+                  onValueChange={(val) => setDetail((p) => (p && p.user ? { ...p, user: { ...p.user, role: val || '' } } : p))}
                 >
-                  {ROLE_OPTIONS.map((r) => (
-                    <option key={r} value={r}>
-                      {r.replace('_', ' ')}
-                    </option>
-                  ))}
-                </select>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {ROLE_OPTIONS.map((r) => (
+                      <SelectItem key={r} value={r}>
+                        {r.replace('_', ' ')}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-2 lg:col-span-4">
                 <label className="text-[10px] font-bold uppercase text-slate-400">Status</label>
-                <select
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs outline-none dark:border-slate-800 dark:bg-slate-950"
+                <Select
                   value={detail.user.status}
-                  onChange={(e) => setDetail((p) => (p && p.user ? { ...p, user: { ...p.user, status: e.target.value } } : p))}
+                  onValueChange={(val) => setDetail((p) => (p && p.user ? { ...p, user: { ...p.user, status: val || '' } } : p))}
                 >
-                  <option value="active">active</option>
-                  <option value="inactive">inactive</option>
-                </select>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="active">active</SelectItem>
+                    <SelectItem value="inactive">inactive</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               {detail.user.role === 'student' && detail.studentProfile && (

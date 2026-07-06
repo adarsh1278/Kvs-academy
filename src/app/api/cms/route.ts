@@ -12,10 +12,10 @@ export async function GET() {
       config = await CMS.create({
         key: 'school_settings',
         value: {
-          heroTitle: 'Excellence Academy, New Delhi',
+          heroTitle: 'KVS Academy, New Delhi',
           heroSubtitle: 'Nurturing Leaders of Tomorrow. Affiliated to CBSE.',
           bannerImage: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200',
-          aboutUs: 'Founded in 2005, Excellence Academy is a premier co-educational institution committed to academic excellence, character development, and social responsibility.',
+          aboutUs: 'Founded in 2005, KVS Academy is a premier co-educational institution committed to academic excellence, character development, and social responsibility.',
           address: '45, Palm Avenue, Sector 5, New Delhi - 110001',
           phone: '+91 11 2345 6789',
           toppers: [

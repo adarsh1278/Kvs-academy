@@ -8,6 +8,7 @@ export default function CMSPage() {
   const [heroSubtitle, setHeroSubtitle] = useState('');
   const [bannerImage, setBannerImage] = useState('');
   const [bannerImageBase64, setBannerImageBase64] = useState('');
+  const [bannerPreviewUrl, setBannerPreviewUrl] = useState('');
   const [aboutUs, setAboutUs] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
@@ -58,6 +59,7 @@ export default function CMSPage() {
   const handleBannerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    setBannerPreviewUrl(URL.createObjectURL(file));
     const reader = new FileReader();
     reader.onloadend = () => {
       setBannerImageBase64(reader.result as string);
@@ -231,9 +233,9 @@ export default function CMSPage() {
                       {bannerImageBase64 ? 'New photo selected (save to upload)' : bannerImage ? 'Current active photo loaded' : 'No photo uploaded'}
                     </div>
                   </div>
-                  {(bannerImageBase64 || bannerImage) && (
+                  {(bannerPreviewUrl || bannerImageBase64 || bannerImage) && (
                     <img
-                      src={bannerImageBase64 || bannerImage}
+                      src={bannerPreviewUrl || bannerImageBase64 || bannerImage}
                       alt="Banner Preview"
                       className="mt-3 h-28 w-full object-cover rounded-xl border border-slate-200 dark:border-slate-800"
                     />

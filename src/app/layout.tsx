@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Excellence Academy - School ERP & Website',
+  title: 'KVS Academy - School ERP & Website',
   description:
-    'Excellence Academy provides high-quality education and modern school ERP services including role-based portals, class management, online admissions, fee collections, and grading systems.',
+    'KVS Academy provides high-quality education and modern school ERP services including role-based portals, class management, online admissions, fee collections, and grading systems.',
   metadataBase: new URL('http://localhost:3000'),
 };
 

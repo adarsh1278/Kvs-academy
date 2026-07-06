@@ -4,6 +4,21 @@ import React, { useState, useEffect } from 'react';
 import { Layers, Plus, Users, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useStore } from '@/store/useStore';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function ClassesPage() {
   const router = useRouter();
@@ -137,20 +152,18 @@ export default function ClassesPage() {
             Create Section Division
           </h3>
           <form onSubmit={handleAddSection} className="grid grid-cols-3 gap-3">
-            <select
-              required
-              disabled={submitting}
-              value={selectedClassId}
-              onChange={(e) => setSelectedClassId(e.target.value)}
-              className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-55 dark:bg-slate-950 px-3 py-2 text-xs focus:outline-none"
-            >
-              <option value="">Choose Class</option>
-              {classes.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
+            <Select value={selectedClassId} onValueChange={(val) => setSelectedClassId(val || '')} disabled={submitting}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Choose Class" />
+              </SelectTrigger>
+              <SelectContent>
+                {classes.map((c) => (
+                  <SelectItem key={c.id} value={c.id}>
+                    {c.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <input
               type="text"
               required
@@ -215,28 +228,30 @@ export default function ClassesPage() {
           {loading ? (
             <div className="text-center py-6 text-slate-400">Loading...</div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr className="border-b border-slate-100 dark:border-slate-800 text-slate-400 font-bold uppercase">
-                    <th className="py-2.5">Class</th>
-                    <th className="py-2.5">Section Name</th>
-                    <th className="py-2.5">Class Teacher Assigned</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-750 dark:text-slate-350">
+            <div className="rounded-md border border-slate-200 dark:border-slate-800 overflow-hidden">
+              <Table>
+                <TableHeader className="bg-slate-50 dark:bg-slate-900/50">
+                  <TableRow className="hover:bg-transparent">
+                    <TableHead className="font-bold uppercase text-slate-500">Class</TableHead>
+                    <TableHead className="font-bold uppercase text-slate-500">Section Name</TableHead>
+                    <TableHead className="font-bold uppercase text-slate-500">Class Teacher Assigned</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {sections.map((sec) => (
-                    <tr key={sec.id}>
-                      <td className="py-3 font-bold text-indigo-600 dark:text-indigo-400">{sec.className}</td>
-                      <td className="py-3 font-extrabold">{sec.name}</td>
-                      <td className="py-3 flex items-center gap-1.5">
-                        <Users className="h-3.5 w-3.5 text-slate-400 shrink-0" />
-                        <span>{sec.teacher}</span>
-                      </td>
-                    </tr>
+                    <TableRow key={sec.id}>
+                      <TableCell className="font-bold text-indigo-600 dark:text-indigo-400">{sec.className}</TableCell>
+                      <TableCell className="font-extrabold">{sec.name}</TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-1.5">
+                          <Users className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+                          <span>{sec.teacher}</span>
+                        </div>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
           )}
         </div>

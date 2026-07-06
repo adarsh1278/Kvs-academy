@@ -105,7 +105,7 @@ function LoginForm() {
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 backdrop-blur-md border border-white/20">
               <School className="h-6 w-6 text-white" />
             </div>
-            <span>Excellence Academy</span>
+            <span>KVS Academy</span>
           </Link>
         </div>
 
@@ -129,7 +129,7 @@ function LoginForm() {
         </div>
 
         <div className="relative z-10 text-xs text-indigo-300/80 flex items-center justify-between border-t border-white/10 pt-6">
-          <span>© 2026 Excellence Academy. All rights reserved.</span>
+          <span>© 2026 KVS Academy. All rights reserved.</span>
           <span className="flex items-center gap-1">
             <ShieldCheck className="h-3.5 w-3.5" /> Secure SSL 256-Bit
           </span>
@@ -154,34 +154,11 @@ function LoginForm() {
               onClick={handleInstallClick}
               className="w-full flex items-center justify-center gap-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/40 dark:hover:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-900 px-4 py-3 text-xs font-bold text-indigo-700 dark:text-indigo-300 shadow-sm transition cursor-pointer"
             >
-              <Download className="h-4.5 w-4.5" /> Install Excellence Academy ERP App
+              <Download className="h-4.5 w-4.5" /> Install KVS Academy ERP App
             </button>
           )}
 
-          <div className="space-y-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 shadow-sm">
-            <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-              Quick Connect (Demo Mode)
-            </h3>
-            <p className="text-xs text-slate-400 dark:text-slate-500">
-              Click a profile to auto-fill. Password for all: <span className="font-mono bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-slate-600 dark:text-slate-300 font-bold">Admin@123</span>
-            </p>
-            <div className="flex flex-wrap gap-2 pt-1">
-              {demoAccounts.map((account) => {
-                const Icon = account.icon;
-                return (
-                  <button
-                    key={account.role}
-                    type="button"
-                    onClick={() => handleQuickFill(account.email)}
-                    className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition cursor-pointer ${account.color}`}
-                  >
-                    <Icon className="h-3.5 w-3.5" />
-                    {account.label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+
 
           {error && (
             <div className="flex items-center gap-3 rounded-xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/50 p-4 text-sm text-rose-600 dark:text-rose-400">

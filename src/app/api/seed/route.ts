@@ -437,7 +437,7 @@ export async function GET() {
       {
         key: 'home_hero',
         value: {
-          title: 'Excellence Academy',
+          title: 'KVS Academy',
           subtitle: 'Empowering minds, shaping futures, and building leaders of tomorrow.',
           bannerImage: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200',
           ctaText: 'Apply for Admission',
@@ -449,7 +449,7 @@ export async function GET() {
         value: {
           title: 'Inspiring Academic Growth Since 1998',
           history:
-            'Excellence Academy was established in 1998 with a vision to provide quality education and foster all-around development. Over the last two decades, we have grown into one of the region\'s premier educational institutions, combining rigorous academics with extensive co-curricular programs.',
+            'KVS Academy was established in 1998 with a vision to provide quality education and foster all-around development. Over the last two decades, we have grown into one of the region\'s premier educational institutions, combining rigorous academics with extensive co-curricular programs.',
           mission: 'To cultivate a learning environment that nurtures intellectual curiosity, integrity, and social responsibility.',
           vision: 'To be a globally recognized center of excellence in early and secondary education, producing empathetic leaders.',
         },
@@ -461,7 +461,7 @@ export async function GET() {
           title: 'Principal\'s Message',
           photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400',
           message:
-            'Dear Parents and Students, Welcome to Excellence Academy. Our commitment is to provide a safe, nurturing, and intellectually challenging environment. We believe that every child is unique and has the potential to make a positive impact on the world. We work hand-in-hand with parents to ensure our students grow into responsible, creative, and successful global citizens.',
+            'Dear Parents and Students, Welcome to KVS Academy. Our commitment is to provide a safe, nurturing, and intellectually challenging environment. We believe that every child is unique and has the potential to make a positive impact on the world. We work hand-in-hand with parents to ensure our students grow into responsible, creative, and successful global citizens.',
         },
       },
       {
@@ -471,7 +471,7 @@ export async function GET() {
           title: 'Director\'s Message',
           photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400',
           message:
-            'At Excellence Academy, our focus is on comprehensive development. Education goes beyond textbooks; it encompasses sports, visual and performing arts, communication skills, and character building. We are dedicated to providing state-of-the-art infrastructure and highly qualified faculty to enable our students to compete at international levels.',
+            'At KVS Academy, our focus is on comprehensive development. Education goes beyond textbooks; it encompasses sports, visual and performing arts, communication skills, and character building. We are dedicated to providing state-of-the-art infrastructure and highly qualified faculty to enable our students to compete at international levels.',
         },
       },
       {
@@ -539,12 +539,12 @@ export async function GET() {
         value: {
           list: [
             {
-              question: 'What is the teacher-to-student ratio at Excellence Academy?',
+              question: 'What is the teacher-to-student ratio at KVS Academy?',
               answer: 'We maintain an average ratio of 1:25 to ensure personalized attention for every student.',
             },
             {
               question: 'Which educational board is the school affiliated with?',
-              answer: 'Excellence Academy is affiliated with the Central Board of Secondary Education (CBSE), New Delhi.',
+              answer: 'KVS Academy is affiliated with the Central Board of Secondary Education (CBSE), New Delhi.',
             },
             {
               question: 'Does the school provide transport facilities?',

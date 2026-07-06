@@ -27,7 +27,7 @@ export default function ContactPage() {
 
   const contactCards = [
     { label: 'Call Office Desk', desc: 'Monday - Friday (8am - 2:30pm)', val: '+1 (555) 019-2834', icon: Phone },
-    { label: 'Email Desk', desc: 'General queries & transcripts', val: 'info@excellence.edu', icon: Mail },
+    { label: 'Email Desk', desc: 'General queries & transcripts', val: 'info@kvsacademy.com', icon: Mail },
     { label: 'Campus Address', desc: 'Visit our administrative block', val: '45, Palm Avenue, New Delhi', icon: MapPin },
   ];
 

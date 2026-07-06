@@ -41,7 +41,7 @@ export async function GET() {
 
     const superAdminUser = await User.create({
       name: 'Dr. Rajesh Sharma',
-      email: 'superadmin@excellence.edu',
+      email: 'superadmin@kvsacademy.com',
       password: adminPassword,
       role: 'super_admin',
       status: 'active',
@@ -49,7 +49,7 @@ export async function GET() {
 
     const adminUser = await User.create({
       name: 'Mrs. Anita Verma',
-      email: 'admin@excellence.edu',
+      email: 'admin@kvsacademy.com',
       password: adminPassword,
       role: 'admin',
       status: 'active',
@@ -57,7 +57,7 @@ export async function GET() {
 
     const receptionistUser = await User.create({
       name: 'Mr. Rohan Dev',
-      email: 'receptionist@excellence.edu',
+      email: 'receptionist@kvsacademy.com',
       password: adminPassword,
       role: 'receptionist',
       status: 'active',
@@ -69,7 +69,7 @@ export async function GET() {
 
     const teacherUser = await User.create({
       name: 'Mr. Sanjay Gupta',
-      email: 'teacher@excellence.edu',
+      email: 'teacher@kvsacademy.com',
       password: adminPassword,
       role: 'teacher',
       status: 'active',
@@ -78,7 +78,7 @@ export async function GET() {
 
     const studentUser = await User.create({
       name: 'Aarav Mehta',
-      email: 'student@excellence.edu',
+      email: 'student@kvsacademy.com',
       password: adminPassword,
       role: 'student',
       status: 'active',
@@ -203,7 +203,7 @@ export async function GET() {
 
     for (let i = 0; i < teacherNames.length; i++) {
       const name = teacherNames[i];
-      const email = `teacher${i + 1}@excellence.edu`;
+      const email = `teacher${i + 1}@kvsacademy.com`;
       const user = await User.create({
         name,
         email,
@@ -385,7 +385,7 @@ export async function GET() {
       const fName = firstNames[i % firstNames.length];
       const lName = lastNames[(i * 3) % lastNames.length];
       const name = `${fName} ${lName}`;
-      const email = `student${i}@excellence.edu`;
+      const email = `student${i}@kvsacademy.com`;
 
       const user = await User.create({
         name,
@@ -563,11 +563,11 @@ export async function GET() {
       success: true,
       message: 'Database seeded successfully!',
       users: {
-        super_admin: 'superadmin@excellence.edu',
-        admin: 'admin@excellence.edu',
-        receptionist: 'receptionist@excellence.edu',
-        teacher: 'teacher@excellence.edu',
-        student: 'student@excellence.edu',
+        super_admin: 'superadmin@kvsacademy.com',
+        admin: 'admin@kvsacademy.com',
+        receptionist: 'receptionist@kvsacademy.com',
+        teacher: 'teacher@kvsacademy.com',
+        student: 'student@kvsacademy.com',
         password: 'Admin@123',
       },
     });

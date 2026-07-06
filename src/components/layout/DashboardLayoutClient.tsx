@@ -139,7 +139,7 @@ export default function DashboardLayoutClient({
           </div>
           <div>
             <span className="text-sm font-bold tracking-tight text-slate-900 dark:text-white block leading-tight">
-              Excellence Portal
+              KVS Academy Portal
             </span>
             <span className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold block">
               {user.role.replace('_', ' ')}
@@ -211,7 +211,7 @@ export default function DashboardLayoutClient({
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
               <School className="h-5 w-5" />
             </div>
-            <span className="text-sm font-bold text-slate-900 dark:text-white">Excellence ERP</span>
+            <span className="text-sm font-bold text-slate-900 dark:text-white">KVS Academy ERP</span>
           </div>
           <button onClick={() => setMobileMenuOpen(false)} className="text-slate-400 hover:text-slate-600">
             <X className="h-5 w-5" />

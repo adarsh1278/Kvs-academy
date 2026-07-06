@@ -470,7 +470,7 @@ export default function FeesCollectionPage() {
                   <p className="text-[10px] text-slate-500 leading-tight">
                     45, Palm Avenue, Sector 5, New Delhi - 110001
                   </p>
-                  <p className="text-[10px] text-slate-500">Contact: +1 (555) 019-2834 | info@excellence.edu</p>
+                  <p className="text-[10px] text-slate-500">Contact: +1 (555) 019-2834 | info@kvsacademy.com</p>
                 </div>
                 <div className="text-right">
                   <span className="block text-lg font-black text-slate-950 uppercase tracking-widest">

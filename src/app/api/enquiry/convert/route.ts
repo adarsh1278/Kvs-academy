@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     }
 
     // Generate unique email if parent email is not provided
-    const tempEmail = enquiry.parentEmail || `student.${enquiry._id.toString().slice(-5)}@excellence.edu`;
+    const tempEmail = enquiry.parentEmail || `student.${enquiry._id.toString().slice(-5)}@kvsacademy.com`;
     const generatedPassword = 'Admin@123';
     const defaultPass = await hashPassword(generatedPassword);
 

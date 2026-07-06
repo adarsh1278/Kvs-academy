@@ -11,6 +11,8 @@ import {
   Clock,
 } from 'lucide-react';
 import PublicNavbar from '@/components/layout/PublicNavbar';
+import DeveloperAvatar from '@/components/DeveloperAvatar';
+import LoadingScreen from '@/components/layout/LoadingScreen';
 
 const defaultSettings = {
   schoolName: 'KVS Academy',
@@ -46,20 +48,22 @@ export default async function PublicLayout({ children }: { children: React.React
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-50 dark:bg-slate-950">
+      <LoadingScreen />
+      
       {/* 1. Top Informational Banner */}
-      <div className="bg-indigo-900 text-indigo-100 text-xs py-2 px-4 md:px-8 flex flex-col sm:flex-row justify-between items-center gap-2 border-b border-indigo-800">
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <span className="flex items-center gap-1">
-            <Phone className="h-3 w-3" /> {settings.phone}
+      <div className="bg-indigo-950 text-indigo-100 text-[10px] sm:text-xs py-1.5 px-4 md:px-8 flex justify-between items-center gap-2 border-b border-indigo-900/50 hidden md:flex">
+        <div className="flex items-center gap-4">
+          <span className="flex items-center gap-1.5 font-medium tracking-wide">
+            <Phone className="h-3 w-3 text-indigo-400" /> {settings.phone}
           </span>
-          <span className="flex items-center gap-1">
-            <Mail className="h-3 w-3" /> {settings.email}
+          <span className="hidden sm:flex items-center gap-1.5 font-medium tracking-wide">
+            <Mail className="h-3 w-3 text-indigo-400" /> {settings.email}
           </span>
-          <span className="flex items-center gap-1">
-            <MapPin className="h-3 w-3" /> {settings.address}
+          <span className="hidden lg:flex items-center gap-1.5 font-medium tracking-wide">
+            <MapPin className="h-3 w-3 text-indigo-400" /> {settings.address}
           </span>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <a href="#" className="hover:text-white transition" aria-label="Facebook">
             <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24">
               <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
@@ -155,11 +159,15 @@ export default async function PublicLayout({ children }: { children: React.React
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-3">
             <span>© 2026 KVS Academy. All rights reserved.</span>
-            <span className="text-slate-400">
-              Made with ❤️ by <a href="https://adarsh1278.vercel.app/" className="text-indigo-400 hover:underline font-bold">Adarsh</a>. For custom Software & ERP Solutions, Call: <span className="text-indigo-400 font-bold">7985643966</span>
-            </span>
+            <div className="flex items-center gap-3">
+              <DeveloperAvatar />
+              <span className="text-slate-400">
+                Made with ❤️ by <a href="https://adarsh1278.vercel.app/" className="text-indigo-400 hover:underline font-bold">Adarsh</a>.<br/>
+                For custom Software & ERP Solutions, Call: <span className="text-indigo-400 font-bold">7985643966</span>
+              </span>
+            </div>
           </div>
           <div className="flex gap-4">
             <a href="#" className="hover:underline">Privacy Policy</a>

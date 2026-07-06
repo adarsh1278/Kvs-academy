@@ -49,11 +49,11 @@ function LoginForm() {
   };
 
   const demoAccounts = [
-    { label: 'Super Admin', email: 'superadmin@excellence.edu', role: 'super_admin', icon: ShieldCheck, color: 'bg-indigo-100 text-indigo-700 hover:bg-indigo-200 border-indigo-200 dark:bg-indigo-950 dark:text-indigo-300 dark:border-indigo-900' },
-    { label: 'Admin', email: 'admin@excellence.edu', role: 'admin', icon: Users, color: 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200 border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-900' },
-    { label: 'Receptionist', email: 'receptionist@excellence.edu', role: 'receptionist', icon: Briefcase, color: 'bg-cyan-100 text-cyan-700 hover:bg-cyan-200 border-cyan-200 dark:bg-cyan-950 dark:text-cyan-300 dark:border-cyan-900' },
-    { label: 'Teacher', email: 'teacher@excellence.edu', role: 'teacher', icon: KeyRound, color: 'bg-amber-100 text-amber-700 hover:bg-amber-200 border-amber-200 dark:bg-amber-950 dark:text-amber-300 dark:border-amber-900' },
-    { label: 'Student', email: 'student@excellence.edu', role: 'student', icon: GraduationCap, color: 'bg-rose-100 text-rose-700 hover:bg-rose-200 border-rose-200 dark:bg-rose-950 dark:text-rose-300 dark:border-rose-900' },
+    { label: 'Super Admin', email: 'superadmin@kvsacademy.com', role: 'super_admin', icon: ShieldCheck, color: 'bg-indigo-100 text-indigo-700 hover:bg-indigo-200 border-indigo-200 dark:bg-indigo-950 dark:text-indigo-300 dark:border-indigo-900' },
+    { label: 'Admin', email: 'admin@kvsacademy.com', role: 'admin', icon: Users, color: 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200 border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-900' },
+    { label: 'Receptionist', email: 'receptionist@kvsacademy.com', role: 'receptionist', icon: Briefcase, color: 'bg-cyan-100 text-cyan-700 hover:bg-cyan-200 border-cyan-200 dark:bg-cyan-950 dark:text-cyan-300 dark:border-cyan-900' },
+    { label: 'Teacher', email: 'teacher@kvsacademy.com', role: 'teacher', icon: KeyRound, color: 'bg-amber-100 text-amber-700 hover:bg-amber-200 border-amber-200 dark:bg-amber-950 dark:text-amber-300 dark:border-amber-900' },
+    { label: 'Student', email: 'student@kvsacademy.com', role: 'student', icon: GraduationCap, color: 'bg-rose-100 text-rose-700 hover:bg-rose-200 border-rose-200 dark:bg-rose-950 dark:text-rose-300 dark:border-rose-900' },
   ];
 
   const handleQuickFill = (demoEmail: string) => {
@@ -176,7 +176,7 @@ function LoginForm() {
                 <input
                   type="text"
                   required
-                  placeholder="name@excellence.edu or 9876543210"
+                  placeholder="name@kvsacademy.com or 9876543210"
                   value={identifier}
                   onChange={(e) => setIdentifier(e.target.value)}
                   className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition"

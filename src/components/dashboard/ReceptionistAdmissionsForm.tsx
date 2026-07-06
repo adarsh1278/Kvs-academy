@@ -51,7 +51,7 @@ export default function ReceptionistAdmissionsForm({
     const randomSuffix = Math.floor(100 + Math.random() * 900);
     const randomRoll = Math.floor(10 + Math.random() * 80);
     const shortName = formData.name.trim().toLowerCase().replace(/\s+/g, '');
-    const genEmail = shortName ? `${shortName}.${randomSuffix}@excellence.edu` : `student.${randomSuffix}@excellence.edu`;
+    const genEmail = shortName ? `${shortName}.${randomSuffix}@kvsacademy.com` : `student.${randomSuffix}@kvsacademy.com`;
 
     setFormData((prev) => ({
       ...prev,
@@ -307,7 +307,7 @@ export default function ReceptionistAdmissionsForm({
               type="email"
               name="email"
               required
-              placeholder="e.g. aarav.101@excellence.edu"
+              placeholder="e.g. aarav.101@kvsacademy.com"
               value={formData.email}
               onChange={handleInputChange}
               className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-3.5 py-2 text-xs focus:outline-none"

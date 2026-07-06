@@ -153,7 +153,7 @@ export default function TeachersListPage() {
                 type="email"
                 required
                 disabled={submitting}
-                placeholder="e.g. alok.tripathi@excellence.edu"
+                placeholder="e.g. alok.tripathi@kvsacademy.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-55 dark:bg-slate-950 px-3.5 py-2 text-xs focus:outline-none"

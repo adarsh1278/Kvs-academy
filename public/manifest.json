@@ -1,0 +1,18 @@
+{
+  "name": "Excellence Academy ERP",
+  "short_name": "Excellence ERP",
+  "description": "Comprehensive School Management ERP Portal",
+  "start_url": "/login",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#4f46e5",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

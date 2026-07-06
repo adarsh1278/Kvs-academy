@@ -1,0 +1,412 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { Search, Plus, X } from 'lucide-react';
+
+export default function TeachersListPage() {
+  const [teachers, setTeachers] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+
+  // Form states
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [qualification, setQualification] = useState('');
+  const [experience, setExperience] = useState('');
+  const [salary, setSalary] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [showAddForm, setShowAddForm] = useState(false);
+
+  // Pagination & Modal states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedTeacher, setSelectedTeacher] = useState<any | null>(null);
+  const itemsPerPage = 10;
+
+  const loadData = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/teachers');
+      const data = await res.json();
+      if (data.success) {
+        setTeachers(data.teachers);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  // Reset page to 1 when search changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
+
+  const handleRegisterTeacher = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !email || !qualification || !experience || !salary || submitting) return;
+
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/teachers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, qualification, experience, salary }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        alert('Teacher successfully registered and credentialed!');
+        setName('');
+        setEmail('');
+        setPhone('');
+        setQualification('');
+        setExperience('');
+        setSalary('');
+        setShowAddForm(false);
+        loadData();
+      } else {
+        alert(data.error || 'Failed to register teacher');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error connecting to teacher registration endpoint.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const filteredTeachers = teachers.filter((t) =>
+    (t.name || '').toLowerCase().includes(search.toLowerCase()) ||
+    (t.teacherId || '').toLowerCase().includes(search.toLowerCase()) ||
+    (t.email || '').toLowerCase().includes(search.toLowerCase())
+  );
+
+  const totalPages = Math.ceil(filteredTeachers.length / itemsPerPage);
+  const paginatedTeachers = filteredTeachers.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-black text-slate-900 dark:text-white">Teacher Management</h1>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            Monitor all classroom teachers, qualifications dossier records, contact details, and monthly payroll info. Click on any row to open their full profile.
+          </p>
+        </div>
+        <button
+          onClick={() => setShowAddForm(!showAddForm)}
+          className="rounded-xl bg-indigo-600 hover:bg-indigo-700 px-4 py-2 text-xs font-bold text-white transition flex items-center gap-1 cursor-pointer"
+        >
+          <Plus className="h-4 w-4" /> Register Teacher
+        </button>
+      </div>
+
+      {/* Add Teacher Form Modal/Box */}
+      {showAddForm && (
+        <form onSubmit={handleRegisterTeacher} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4 max-w-2xl">
+          <h3 className="text-sm font-bold text-slate-855 dark:text-white uppercase tracking-wider">
+            Teacher Particulars
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                Instructor Name
+              </label>
+              <input
+                type="text"
+                required
+                disabled={submitting}
+                placeholder="e.g. Dr. Alok Tripathi"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-55 dark:bg-slate-950 px-3.5 py-2 text-xs focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                Portal Email Login
+              </label>
+              <input
+                type="email"
+                required
+                disabled={submitting}
+                placeholder="e.g. alok.tripathi@excellence.edu"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-55 dark:bg-slate-950 px-3.5 py-2 text-xs focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                Mobile Number (Optional)
+              </label>
+              <input
+                type="text"
+                disabled={submitting}
+                placeholder="e.g. 9876543210"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-55 dark:bg-slate-950 px-3.5 py-2 text-xs focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                Qualification Dossier
+              </label>
+              <input
+                type="text"
+                required
+                disabled={submitting}
+                placeholder="e.g. Ph.D. in Organic Chemistry"
+                value={qualification}
+                onChange={(e) => setQualification(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-55 dark:bg-slate-950 px-3.5 py-2 text-xs focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                Prior Experience
+              </label>
+              <input
+                type="text"
+                required
+                disabled={submitting}
+                placeholder="e.g. 15 Years"
+                value={experience}
+                onChange={(e) => setExperience(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-55 dark:bg-slate-950 px-3.5 py-2 text-xs focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                Basic Monthly Salary (INR)
+              </label>
+              <input
+                type="number"
+                required
+                disabled={submitting}
+                placeholder="e.g. 65000"
+                value={salary}
+                onChange={(e) => setSalary(e.target.value)}
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-55 dark:bg-slate-950 px-3.5 py-2 text-xs focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-2">
+            <button
+              type="submit"
+              disabled={submitting}
+              className="rounded-xl bg-indigo-600 hover:bg-indigo-700 px-5 py-2 text-xs font-bold text-white transition disabled:opacity-50 cursor-pointer"
+            >
+              {submitting ? 'Registering...' : 'Save Profile'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowAddForm(false)}
+              className="rounded-xl border border-slate-200 hover:bg-slate-50 px-5 py-2 text-xs font-bold text-slate-500 transition cursor-pointer"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      )}
+
+      {/* Controls */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+        {/* Search */}
+        <div className="relative w-full md:w-80">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 h-4.5 w-4.5" />
+          <input
+            type="text"
+            placeholder="Search by instructor name or ID..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full rounded-xl border border-slate-255 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 pl-10 pr-4 py-2 text-xs focus:outline-none"
+          />
+        </div>
+      </div>
+
+      {/* Table grid */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+        {loading ? (
+          <div className="text-center py-10 text-slate-400">Loading teacher directory...</div>
+        ) : filteredTeachers.length === 0 ? (
+          <div className="text-center py-10 text-slate-400">No teachers found matching those search terms.</div>
+        ) : (
+          <div className="space-y-4">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-100 dark:border-slate-800 text-slate-400 font-bold uppercase">
+                    <th className="py-2.5">Teacher ID</th>
+                    <th className="py-2.5">Instructor Name</th>
+                    <th className="py-2.5">Qualifications & Experience</th>
+                    <th className="py-2.5">Payroll Salary</th>
+                    <th className="py-2.5">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-slate-750 dark:text-slate-350">
+                  {paginatedTeachers.map((t) => (
+                    <tr
+                      key={t.id}
+                      onClick={() => setSelectedTeacher(t)}
+                      className="hover:bg-indigo-50/30 dark:hover:bg-indigo-950/10 transition cursor-pointer"
+                    >
+                      <td className="py-3.5 font-mono font-bold text-indigo-650 dark:text-indigo-400">{t.teacherId}</td>
+                      <td className="py-3.5">
+                        <span className="block font-bold text-slate-900 dark:text-white">{t.name}</span>
+                        <span className="block text-[10px] text-slate-400 mt-0.5">{t.email}</span>
+                      </td>
+                      <td className="py-3.5">
+                        <span className="block font-medium text-slate-800 dark:text-slate-300">{t.qualification}</span>
+                        <span className="block text-[10px] text-slate-400 mt-0.5">Exp: {t.experience}</span>
+                      </td>
+                      <td className="py-3.5 font-extrabold text-slate-900 dark:text-white">₹{t.salary?.toLocaleString() || '0'}</td>
+                      <td className="py-3.5">
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-450 border border-emerald-100 dark:border-emerald-900">
+                          {t.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Pagination controls */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-4 text-xs font-semibold text-slate-500">
+                <div>
+                  Showing {Math.min(filteredTeachers.length, (currentPage - 1) * itemsPerPage + 1)} to{' '}
+                  {Math.min(filteredTeachers.length, currentPage * itemsPerPage)} of {filteredTeachers.length} entries
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+                    disabled={currentPage === 1}
+                    className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 transition disabled:opacity-50 cursor-pointer"
+                  >
+                    Previous
+                  </button>
+                  {Array.from({ length: totalPages }).map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentPage(i + 1)}
+                      className={`px-3 py-1.5 rounded-lg border transition cursor-pointer ${
+                        currentPage === i + 1
+                          ? 'bg-indigo-600 text-white border-indigo-650'
+                          : 'border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 dark:text-slate-450'
+                      }`}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+                    disabled={currentPage === totalPages || totalPages === 0}
+                    className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-850 transition disabled:opacity-50 cursor-pointer"
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Teacher Profile Modal */}
+      {selectedTeacher && (
+        <div className="fixed inset-0 z-55 flex items-center justify-center bg-slate-950/40 backdrop-blur-sm p-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto">
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedTeacher(null)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {/* Profile Header */}
+            <div className="flex items-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+              {selectedTeacher.profileImage ? (
+                <img
+                  src={selectedTeacher.profileImage}
+                  alt={selectedTeacher.name}
+                  className="h-16 w-16 rounded-full object-cover shadow border border-slate-200 dark:border-slate-800"
+                />
+              ) : (
+                <div className="h-16 w-16 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-350 font-bold text-xl uppercase flex items-center justify-center border border-slate-200 dark:border-slate-800 shrink-0">
+                  {selectedTeacher.name.substring(0, 2)}
+                </div>
+              )}
+              <div>
+                <h3 className="text-lg font-black text-slate-900 dark:text-white leading-tight">{selectedTeacher.name}</h3>
+                <p className="text-xs text-indigo-650 dark:text-indigo-400 font-mono font-bold mt-1">ID: {selectedTeacher.teacherId}</p>
+                <p className="text-[10px] text-slate-450 uppercase font-semibold tracking-wider mt-0.5">Faculty Member</p>
+              </div>
+            </div>
+
+            {/* Details Fields */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div>
+                <span className="block text-[10px] uppercase font-bold text-slate-400">Portal Email</span>
+                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedTeacher.email}</span>
+              </div>
+              <div>
+                <span className="block text-[10px] uppercase font-bold text-slate-400">Employment Status</span>
+                <span className="inline-block px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-450 border border-emerald-100 dark:border-emerald-900 font-bold text-[10px]">
+                  {selectedTeacher.status}
+                </span>
+              </div>
+              <div>
+                <span className="block text-[10px] uppercase font-bold text-slate-400">Qualifications</span>
+                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedTeacher.qualification}</span>
+              </div>
+              <div>
+                <span className="block text-[10px] uppercase font-bold text-slate-400">Prior Experience</span>
+                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedTeacher.experience}</span>
+              </div>
+              <div>
+                <span className="block text-[10px] uppercase font-bold text-slate-400">Monthly Basic Salary</span>
+                <span className="font-bold text-slate-900 dark:text-white">₹{selectedTeacher.salary?.toLocaleString() || 'N/A'}</span>
+              </div>
+              <div>
+                <span className="block text-[10px] uppercase font-bold text-slate-400">Mobile Number</span>
+                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedTeacher.phone || 'N/A'}</span>
+              </div>
+              <div>
+                <span className="block text-[10px] uppercase font-bold text-slate-400">Joining Date</span>
+                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedTeacher.joiningDate || 'N/A'}</span>
+              </div>
+            </div>
+            
+            <div className="flex justify-end pt-4 border-t border-slate-100 dark:border-slate-800">
+              <button
+                onClick={() => setSelectedTeacher(null)}
+                className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition cursor-pointer text-xs shadow-md"
+              >
+                Close Profile
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

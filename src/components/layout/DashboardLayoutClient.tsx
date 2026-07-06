@@ -22,6 +22,7 @@ import {
   Sun,
   Moon,
   TrendingUp,
+  Award,
 } from 'lucide-react';
 
 interface UserSession {
@@ -82,6 +83,7 @@ export default function DashboardLayoutClient({
       const links = [
         { label: 'Overview', href: `/dashboard/${rolePath}`, icon: TrendingUp },
         { label: 'Classes & Sections', href: `/dashboard/${rolePath}/classes`, icon: Layers },
+        { label: 'School Timetable', href: `/dashboard/${rolePath}/timetable`, icon: Calendar },
         { label: 'Subjects Management', href: `/dashboard/${rolePath}/subjects`, icon: BookOpen },
         { label: 'Teacher Management', href: `/dashboard/${rolePath}/teachers`, icon: Users },
         { label: 'Student Management', href: `/dashboard/${rolePath}/students`, icon: GraduationCap },
@@ -110,6 +112,7 @@ export default function DashboardLayoutClient({
       return [
         { label: 'Overview', href: '/dashboard/teacher', icon: TrendingUp },
         { label: 'Mark Attendance', href: '/dashboard/teacher/attendance', icon: Clock },
+        { label: 'Exams & Marks', href: '/dashboard/teacher/exams', icon: Award },
         { label: 'Homework manager', href: '/dashboard/teacher/homework', icon: ClipboardList },
         { label: 'My Timetable', href: '/dashboard/teacher/timetable', icon: Calendar },
         { label: 'View Notice board', href: '/dashboard/teacher/notices', icon: Bell },
@@ -119,6 +122,7 @@ export default function DashboardLayoutClient({
       return [
         { label: 'Dashboard', href: '/dashboard/student', icon: TrendingUp },
         { label: 'My Attendance', href: '/dashboard/student/attendance', icon: Clock },
+        { label: 'Exams & Marks', href: '/dashboard/student/exams', icon: Award },
         { label: 'Homework list', href: '/dashboard/student/homework', icon: ClipboardList },
         { label: 'My Timetable', href: '/dashboard/student/timetable', icon: Calendar },
         { label: 'Notice Board', href: '/dashboard/student/notices', icon: Bell },
@@ -134,8 +138,12 @@ export default function DashboardLayoutClient({
       {/* 1. Desktop Sidebar */}
       <aside className="hidden lg:flex w-64 flex-col bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shrink-0">
         <div className="h-16 flex items-center gap-3 px-6 border-b border-slate-200 dark:border-slate-800">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
-            <School className="h-5 w-5" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl overflow-hidden border border-slate-250 dark:border-slate-700 bg-white shrink-0">
+            <img 
+              src="/KVS CURVE LOGO.jpg.jpeg" 
+              alt="Logo" 
+              className="h-full w-full object-cover"
+            />
           </div>
           <div>
             <span className="text-sm font-bold tracking-tight text-slate-900 dark:text-white block leading-tight">
@@ -208,8 +216,12 @@ export default function DashboardLayoutClient({
       >
         <div className="h-16 flex items-center justify-between px-6 border-b border-slate-200 dark:border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
-              <School className="h-5 w-5" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl overflow-hidden border border-slate-250 dark:border-slate-700 bg-white shrink-0">
+              <img 
+                src="/KVS CURVE LOGO.jpg.jpeg" 
+                alt="Logo" 
+                className="h-full w-full object-cover"
+              />
             </div>
             <span className="text-sm font-bold text-slate-900 dark:text-white">KVS Academy ERP</span>
           </div>

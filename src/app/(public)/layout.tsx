@@ -99,7 +99,13 @@ export default async function PublicLayout({ children }: { children: React.React
           {/* Col 1: About */}
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-white">
-              <School className="h-8 w-8 text-indigo-400" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl overflow-hidden bg-white shrink-0 border border-slate-700">
+                <img 
+                  src="/KVS CURVE LOGO.jpg.jpeg" 
+                  alt="KVS Logo" 
+                  className="h-full w-full object-cover"
+                />
+              </div>
               <span className="text-lg font-bold tracking-tight">{settings.schoolName}</span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed">

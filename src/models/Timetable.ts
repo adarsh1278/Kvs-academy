@@ -1,8 +1,10 @@
 import mongoose, { Schema } from 'mongoose';
 
 const PeriodSchema = new Schema({
-  subject: { type: Schema.Types.ObjectId, ref: 'Subject', required: true },
-  teacher: { type: Schema.Types.ObjectId, ref: 'User', required: true }, // The teacher User teaching this period
+  subject: { type: Schema.Types.ObjectId, ref: 'Subject', required: false },
+  teacher: { type: Schema.Types.ObjectId, ref: 'User', required: false }, // The teacher User teaching this period
+  isBreak: { type: Boolean, default: false },
+  breakTitle: { type: String }, // e.g. "Lunch Break" or "Recess"
   startTime: { type: String, required: true }, // e.g. "08:30"
   endTime: { type: String, required: true }, // e.g. "09:15"
   roomNumber: { type: String },

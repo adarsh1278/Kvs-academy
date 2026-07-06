@@ -2,8 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { Layers, Plus, Users, Trash } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useStore } from '@/store/useStore';
 
 export default function ClassesPage() {
+  const router = useRouter();
+  const { setSelectedClass } = useStore();
+  
   const [classes, setClasses] = useState<any[]>([]);
   const [sections, setSections] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -180,7 +185,11 @@ export default function ClassesPage() {
                 return (
                   <div
                     key={c.id}
-                    className="flex items-center justify-between border border-slate-100 dark:border-slate-850 rounded-2xl p-4"
+                    onClick={() => {
+                      setSelectedClass(c);
+                      router.push(`/dashboard/admin/classes/${c.id}`);
+                    }}
+                    className="flex items-center justify-between border border-slate-100 dark:border-slate-850 rounded-2xl p-4 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition shadow-sm hover:shadow"
                   >
                     <div className="flex items-center gap-3">
                       <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">

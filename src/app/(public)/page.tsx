@@ -27,6 +27,8 @@ const defaultCMS = {
     bannerImage: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200',
     ctaText: 'Apply for Admission',
     ctaLink: '/admissions',
+    address: '45 Palm Ave, New Delhi',
+    phone: '+91 11 2345 6789',
   },
   principal_message: {
     name: 'Dr. Rajesh Sharma',

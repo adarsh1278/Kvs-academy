@@ -1,16 +1,21 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
-import { Search, X } from 'lucide-react';
+
+import { Search } from 'lucide-react';
+import { useRouter, usePathname } from 'next/navigation';
+import { useStore } from '@/store/useStore';
 
 export default function StudentsListPage() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const { setSelectedStudent } = useStore();
+  
   const [students, setStudents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   
-  // Pagination & Modal states
+  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedStudent, setSelectedStudent] = useState<any | null>(null);
   const itemsPerPage = 10;
 
   const loadData = async () => {
@@ -96,7 +101,10 @@ export default function StudentsListPage() {
                   {paginatedStudents.map((student) => (
                     <tr
                       key={student.id}
-                      onClick={() => setSelectedStudent(student)}
+                      onClick={() => {
+                        setSelectedStudent(student);
+                        router.push(`${pathname}/${student.id}`);
+                      }}
                       className="hover:bg-indigo-50/30 dark:hover:bg-indigo-950/10 transition cursor-pointer"
                     >
                       <td className="py-3.5 font-mono font-bold text-indigo-650 dark:text-indigo-400">{student.admissionNo}</td>
@@ -161,104 +169,6 @@ export default function StudentsListPage() {
           </div>
         )}
       </div>
-
-      {/* Student Profile Modal */}
-      {selectedStudent && (
-        <div className="fixed inset-0 z-55 flex items-center justify-center bg-slate-950/40 backdrop-blur-sm p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto">
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedStudent(null)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition"
-            >
-              <X className="h-5 w-5" />
-            </button>
-
-            {/* Profile Header */}
-            <div className="flex items-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
-              {selectedStudent.profileImage ? (
-                <img
-                  src={selectedStudent.profileImage}
-                  alt={selectedStudent.name}
-                  className="h-16 w-16 rounded-full object-cover shadow border border-slate-200 dark:border-slate-800"
-                />
-              ) : (
-                <div className="h-16 w-16 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-350 font-bold text-xl uppercase flex items-center justify-center border border-slate-200 dark:border-slate-800 shrink-0">
-                  {selectedStudent.name.substring(0, 2)}
-                </div>
-              )}
-              <div>
-                <h3 className="text-lg font-black text-slate-900 dark:text-white leading-tight">{selectedStudent.name}</h3>
-                <p className="text-xs text-indigo-650 dark:text-indigo-400 font-mono font-bold mt-1">Admission: {selectedStudent.admissionNo}</p>
-                <p className="text-[10px] text-slate-400 uppercase font-semibold tracking-wider mt-0.5">{selectedStudent.className}</p>
-              </div>
-            </div>
-
-            {/* Details Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Roll Number</span>
-                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedStudent.rollNo}</span>
-              </div>
-              <div>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Status</span>
-                <span className="inline-block px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-450 border border-emerald-100 dark:border-emerald-900 font-bold text-[10px]">
-                  {selectedStudent.status}
-                </span>
-              </div>
-              <div>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Date of Birth</span>
-                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedStudent.dob}</span>
-              </div>
-              <div>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Gender</span>
-                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedStudent.gender}</span>
-              </div>
-              <div>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Parent / Guardian</span>
-                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedStudent.parentName}</span>
-              </div>
-              <div>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Contact Number</span>
-                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedStudent.phone}</span>
-              </div>
-              <div>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Parent Email</span>
-                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedStudent.parentEmail || 'N/A'}</span>
-              </div>
-              <div>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Emergency Phone</span>
-                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedStudent.emergencyContact || 'N/A'}</span>
-              </div>
-              <div>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Aadhaar Number</span>
-                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedStudent.aadhaarNo || 'N/A'}</span>
-              </div>
-              <div>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Transport Details</span>
-                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedStudent.transportDetails || 'N/A'}</span>
-              </div>
-              <div>
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Hostel Details</span>
-                <span className="font-semibold text-slate-800 dark:text-slate-200">{selectedStudent.hostelDetails || 'N/A'}</span>
-              </div>
-              <div className="md:col-span-2">
-                <span className="block text-[10px] uppercase font-bold text-slate-400">Residential Address</span>
-                <span className="font-semibold text-slate-800 dark:text-slate-200 leading-relaxed">{selectedStudent.address}</span>
-              </div>
-            </div>
-            
-            <div className="flex justify-end pt-4 border-t border-slate-100 dark:border-slate-800">
-              <button
-                onClick={() => setSelectedStudent(null)}
-                className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition cursor-pointer text-xs shadow-md"
-              >
-                Close Profile
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

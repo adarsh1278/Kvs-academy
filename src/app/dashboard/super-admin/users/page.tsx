@@ -415,7 +415,7 @@ export default function SuperAdminUsersManagerPage() {
                 <input
                   className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs outline-none dark:border-slate-800 dark:bg-slate-950"
                   value={detail.user.name || ''}
-                  onChange={(e) => setDetail((p) => (p ? { ...p, user: { ...p.user, name: e.target.value } } : p))}
+                  onChange={(e) => setDetail((p) => (p && p.user ? { ...p, user: { ...p.user, name: e.target.value } } : p))}
                 />
               </div>
               <div className="space-y-2 lg:col-span-6">
@@ -423,7 +423,7 @@ export default function SuperAdminUsersManagerPage() {
                 <input
                   className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs outline-none dark:border-slate-800 dark:bg-slate-950"
                   value={detail.user.email || ''}
-                  onChange={(e) => setDetail((p) => (p ? { ...p, user: { ...p.user, email: e.target.value } } : p))}
+                  onChange={(e) => setDetail((p) => (p && p.user ? { ...p, user: { ...p.user, email: e.target.value } } : p))}
                 />
               </div>
               <div className="space-y-2 lg:col-span-4">
@@ -431,7 +431,7 @@ export default function SuperAdminUsersManagerPage() {
                 <input
                   className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs outline-none dark:border-slate-800 dark:bg-slate-950"
                   value={detail.user.phone || ''}
-                  onChange={(e) => setDetail((p) => (p ? { ...p, user: { ...p.user, phone: e.target.value } } : p))}
+                  onChange={(e) => setDetail((p) => (p && p.user ? { ...p, user: { ...p.user, phone: e.target.value } } : p))}
                 />
               </div>
               <div className="space-y-2 lg:col-span-4">
@@ -439,7 +439,7 @@ export default function SuperAdminUsersManagerPage() {
                 <select
                   className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs outline-none dark:border-slate-800 dark:bg-slate-950"
                   value={detail.user.role}
-                  onChange={(e) => setDetail((p) => (p ? { ...p, user: { ...p.user, role: e.target.value } } : p))}
+                  onChange={(e) => setDetail((p) => (p && p.user ? { ...p, user: { ...p.user, role: e.target.value } } : p))}
                 >
                   {ROLE_OPTIONS.map((r) => (
                     <option key={r} value={r}>
@@ -453,7 +453,7 @@ export default function SuperAdminUsersManagerPage() {
                 <select
                   className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs outline-none dark:border-slate-800 dark:bg-slate-950"
                   value={detail.user.status}
-                  onChange={(e) => setDetail((p) => (p ? { ...p, user: { ...p.user, status: e.target.value } } : p))}
+                  onChange={(e) => setDetail((p) => (p && p.user ? { ...p, user: { ...p.user, status: e.target.value } } : p))}
                 >
                   <option value="active">active</option>
                   <option value="inactive">inactive</option>

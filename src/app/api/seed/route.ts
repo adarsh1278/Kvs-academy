@@ -421,7 +421,7 @@ export async function GET() {
       await StudentFee.create({
         student: profile._id,
         feeStructure: struct._id,
-        installments: struct.installments.map(inst => ({
+        installments: struct.installments.map((inst: any) => ({
           name: inst.name,
           dueDate: inst.dueDate,
           amount: inst.amount,

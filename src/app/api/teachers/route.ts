@@ -14,6 +14,7 @@ export async function GET() {
       success: true,
       teachers: teachers.map(t => ({
         id: t._id.toString(),
+        userId: t.user?._id?.toString() || '',
         teacherId: t.teacherId,
         name: t.user?.name || 'Instructor',
         email: t.user?.email || 'N/A',

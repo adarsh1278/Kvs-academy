@@ -6,6 +6,7 @@ const SubjectSchema = new Schema(
     code: { type: String, required: true }, // e.g. "MATH101"
     type: { type: String, required: true, enum: ['Theory', 'Practical', 'Both'], default: 'Theory' },
     class: { type: Schema.Types.ObjectId, ref: 'Class', required: true },
+    subjectTeacher: { type: Schema.Types.ObjectId, ref: 'User' },
   },
   { timestamps: true }
 );

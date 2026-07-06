@@ -29,7 +29,8 @@
     "react-hook-form": "^7.81.0",
     "recharts": "^3.9.2",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^4.4.3"
+    "zod": "^4.4.3",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

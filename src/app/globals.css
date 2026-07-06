@@ -5,6 +5,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --color-slate-250: #d1dbe8;
+  --color-slate-450: #8093ad;
+  --color-slate-550: #50617a;
+  --color-slate-850: #131d31;
+  --color-slate-855: #0d1627;
+
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

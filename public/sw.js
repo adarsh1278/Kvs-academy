@@ -1,4 +1,4 @@
-const CACHE_NAME = 'excellence-erp-v1';
+const CACHE_NAME = 'kvs-academy-erp-v1';
 const ASSETS = [
   '/login',
   '/manifest.json',

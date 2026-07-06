@@ -43,6 +43,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
         status: teacher.employmentStatus,
         joiningDate: teacher.joiningDate ? teacher.joiningDate.toISOString().split('T')[0] : 'N/A',
         profileImage: teacher.profileImage || '',
+        assignedClassIds: teacher.assignedClasses ? teacher.assignedClasses.map((c: any) => c.toString()) : [],
       },
       classAssignments: classAssignments.map(s => ({
         sectionId: s._id.toString(),

@@ -103,6 +103,7 @@ export default function DashboardLayoutClient({
     if (user.role === 'receptionist') {
       return [
         { label: 'Overview', href: '/dashboard/receptionist', icon: TrendingUp },
+        { label: 'Classes & Hub', href: '/dashboard/receptionist/classes', icon: Layers },
         { label: 'Register Admission', href: '/dashboard/receptionist/admissions', icon: ClipboardList },
         { label: 'Search Students', href: '/dashboard/receptionist/students', icon: GraduationCap },
         { label: 'Collect Offline Fees', href: '/dashboard/receptionist/fees', icon: FileSpreadsheet },
@@ -180,9 +181,17 @@ export default function DashboardLayoutClient({
         {/* Bottom profile info */}
         <div className="border-t border-slate-200 dark:border-slate-800 p-4 space-y-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 font-bold uppercase">
-              {user.name.substring(0, 2)}
-            </div>
+            {user.profileImage ? (
+              <img
+                src={user.profileImage}
+                alt={user.name}
+                className="h-10 w-10 rounded-full object-cover shadow-md border border-slate-200 dark:border-slate-800 shrink-0"
+              />
+            ) : (
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 font-bold uppercase shrink-0">
+                {user.name.substring(0, 2)}
+              </div>
+            )}
             <div className="min-w-0">
               <span className="block text-xs font-bold text-slate-800 dark:text-white truncate">
                 {user.name}

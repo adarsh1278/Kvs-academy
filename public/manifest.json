@@ -1,6 +1,6 @@
 {
-  "name": "Excellence Academy ERP",
-  "short_name": "Excellence ERP",
+  "name": "KVS Academy ERP",
+  "short_name": "KVS Academy ERP",
   "description": "Comprehensive School Management ERP Portal",
   "start_url": "/login",
   "display": "standalone",
